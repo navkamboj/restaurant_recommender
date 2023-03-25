@@ -6,20 +6,29 @@ conn = None
 cur1 = None
 cur2 = None
 try:
-    conn = psycopg2.connect(host="localhost",dbname="postgres",user="postgres",password="admin",port=5432)
+    # conn = psycopg2.connect(host="localhost",dbname="postgres",user="postgres",password="admin",port=5432)
+    conn = psycopg2.connect(host="localhost",dbname="feast_hub_sub",user="iktis",password="",port=5434)
     cur1 = conn.cursor()
     cur2 = conn.cursor()
-    cur1.execute('SELECT * FROM revisited_restaurants_data')
+    cur1.execute('SELECT * FROM users_ratings')
     revisited_restaurants = cur1.fetchall()
     data = pd.DataFrame(revisited_restaurants)
+    # Using DataFrame.iloc[] to drop last n columns
+    # Drop first column of dataframe using drop()
+    data.drop(columns=data.columns[0], axis=1,  inplace=True)
+    data = data.iloc[:, :-2]
+    # print(data)
     data.columns=['userID','placeID','overall_rating','food_rating','service_rating']
-    #print(data)
     
-    cur2.execute('SELECT * FROM convertcsv')
+    cur2.execute("SELECT * FROM cusines")
     cuisine = cur2.fetchall()
     df = pd.DataFrame(cuisine)
+    # Using DataFrame.iloc[] to drop last n columns
+    
+    df = df.iloc[:, :-2]
     df.columns=['id','placeID','Rcuisine']
-    print(df)
+    # print(df)
+    # print(data)
 
     def matrix():
         matrix_data=data.pivot_table(index='userID', columns='placeID' , values='overall_rating')
