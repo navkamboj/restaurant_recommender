@@ -1,4 +1,16 @@
-# restaurant_recommender
+# Restaurant Recommender (Feast-Hub)
+
+## Prerequisites
+
+**_ MUST HAVE PYTHON > 2.7 _**
+
+## Clone the project using
+
+> `git clone {project_url}`
+
+## navigate to project directory
+
+> `cd restaurant_recommender`
 
 ## Create a virtual environment for the project using
 
