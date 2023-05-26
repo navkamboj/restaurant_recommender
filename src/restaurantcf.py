@@ -60,7 +60,7 @@ try:
 
         #Restaurant visited by the target user
         matrix_normalization= matrixNormalization()
-        picked_userID_visited = matrix_normalization[ matrix_normalization.index == picked_userID].dropna(axis=1, how='all')
+        picked_userID_visited = matrix_normalization[matrix_normalization.index == picked_userID].dropna(axis=1, how='all')
 
         #Restaurant that similar user visited. Remove restaurants that none of the similar user have visited   
         similar_user_visits = matrix_normalization[matrix_normalization.index.isin(similar_users.index)].dropna(axis=1, how='all')
