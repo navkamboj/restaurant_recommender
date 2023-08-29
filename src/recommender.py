@@ -16,6 +16,7 @@ class Recommender:
             host="localhost", dbname="feast_hub_sub", user="iktis", password="", port=5434)
         self.__load_cusines(conn)
         self.__load_user_ratings(conn)
+        self.__cf_algorithm()
 
     def __load_user_ratings(self, conn: pg.connection) -> None:
         cur = conn.cursor()
@@ -45,7 +46,7 @@ class Recommender:
         self.__cuisine = self.__cuisine.iloc[:, :-2]
         self.__cuisine.columns = ['id', 'placeID', 'Rcuisine']
 
-    def algorithm(self):
+    def __cf_algorithm(self):
         data_matrix = pd.pivot_table(self.__data, index=['userID'], columns=[
                                      'placeID'], values=['overall_rating'])
         # normalize matrix
