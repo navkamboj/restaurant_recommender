@@ -26,7 +26,7 @@ Either
 Or
 
 -   navigate to .venv/Scripts
-    > run `./activate.bat` --> PowerShell
+    > run `./Activate.ps1` --> PowerShell
 
 Then install all the dependencies with the following command
 
